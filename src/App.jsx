@@ -1,9 +1,11 @@
 import { useState } from "react";
 import ToDoItem from "./components/ToDoItem";
+import useLocalStorage from "./useLocalStorage";
 
 function App() {
   const [newTodo, setNewTodo] = useState("");
-  const [todoList, setTodoList] = useState([])
+  // const [todoList, setTodoList] = useState([])
+  const [todoList, setTodoList] = useLocalStorage('TODOS', [])
 
   function handleAddTodo(){
     if(newTodo === '') return
@@ -42,12 +44,7 @@ function App() {
         <h1>TO-DO LIST</h1>
       </header>
       <div className="input-bar">
-        <input
-          className="input-field"
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
+        <input className="input-field" type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)}/>
         <button className="add-todo-btn" onClick={handleAddTodo}>ADD TODO</button>
       </div>
 
